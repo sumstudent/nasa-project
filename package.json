@@ -14,7 +14,7 @@
     "install-all":  "concurrently \"npm:install-server\" \"npm:install-client\"",
 
     "deploy":       "concurrently \"npm run build --prefix client\" \"npm start --prefix server\"",
-    "deploy-cluster":       "concurrently \"npm run build --prefix client\" \"npm run cluster --prefix server\"",
+    "deploy-cluster":"concurrently \"npm run build --prefix client\" \"npm run cluster --prefix server\"",
 
     "test":         "concurrently \"npm test --prefix server\" \"npm test --prefix client\""
   },
