@@ -8,7 +8,7 @@
     "test-watch": "jest --watchAll",
     "test": "jest",
     "start": "node src/server.js",
-    "cluster": "pm2 start src/server.js -i max"
+    "cluster": "npx pm2 start ecosystem.config.js"
   },
   "keywords": [],
   "author": "",
