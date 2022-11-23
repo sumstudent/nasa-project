@@ -11,8 +11,9 @@
 # production
 /build
 /public/static
-/public/index.html
-/public/asset-manifest.json
+public/index.html
+public/asset-manifest.json
+
 
 # misc
 .DS_Store
