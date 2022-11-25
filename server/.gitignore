@@ -10,10 +10,7 @@
 
 # production
 /build
-/public/static
-public/index.html
-public/asset-manifest.json
-
+/public
 
 # misc
 .DS_Store
