@@ -3,7 +3,7 @@
 #
 # COLUMN kepid:          KepID
 # COLUMN kepoi_name:     KOI Name
-# COLUMN keplerName:    Kepler Name
+# COLUMN kepler_Name:    Kepler Name
 # COLUMN koi_disposition: Exoplanet Archive Disposition
 # COLUMN koi_pdisposition: Disposition Using Kepler Data
 # COLUMN koi_score:      Disposition Score
