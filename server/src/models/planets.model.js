@@ -3,6 +3,8 @@ const path = require('path')
 const fs = require('fs');
 
 const habitablePlanets = [];
+const planets = require('./planets.mongo');
+
 
 function isHabitablePlanet(planet) {
     return planet['koi_disposition'] === 'CONFIRMED'
@@ -17,9 +19,13 @@ function loadPlanetsData() {
                 comment: '#',
                 columns: true,
             }))
-            .on('data', (data) => {
+            .on('data', async (data) => {
                 if (isHabitablePlanet(data)) {
-                    habitablePlanets.push(data);
+                    //TODO: Replace below create with Upsert; Update and Insert
+                    // habitablePlanets.push(data);
+                    // await planets.create({
+                    //     keplerName: data.kepler_Name
+                    // });
                 }
             })
             .on('error', (err) => {
