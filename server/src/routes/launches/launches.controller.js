@@ -4,8 +4,8 @@ const {
     existsLaunchWithId,
     abortLaunchById, } = require('../../models/launches.model');
 
-function httpGetAllLaunches(req, res) {
-    return res.status(200).json(getAllLaunches());
+async function httpGetAllLaunches(req, res) {
+    return res.status(200).json(await getAllLaunches());
 }
 
 function httpAddNewLaunch(req, res) {
@@ -44,8 +44,6 @@ function httpAddNewLaunch(req, res) {
 
 function httpAbortLaunch(req, res) {
     const launchId = Number(req.params.id);
-
-    //Returns 404 if laucnchId not found
     if (!existsLaunchWithId(launchId)) {
         return res.status(404).json({
             error: 'CODE: 404, Launch not found'
