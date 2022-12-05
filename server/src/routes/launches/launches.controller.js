@@ -1,8 +1,8 @@
 const {
     getAllLaunches,
-    addNewLaunch,
     existsLaunchWithId,
-    abortLaunchById, } = require('../../models/launches.model');
+    abortLaunchById,
+    scheduleNewLaunch, } = require('../../models/launches.model');
 
 async function httpGetAllLaunches(req, res) {
     return res.status(200).json(await getAllLaunches());
@@ -32,7 +32,7 @@ function httpAddNewLaunch(req, res) {
             }
         }
         counter++;
-        addNewLaunch(launch);
+        scheduleNewLaunch(launch);
     } catch (error) {
         return res.status(500).json({
             message: "CODE 500, Internal Server Error, " + error
