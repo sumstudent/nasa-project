@@ -30,6 +30,8 @@ async function getLatestFlightNumber() {
    if (!latestLaunch) {
       return DEFAULT_FLIGHT_NUMBER;
    }
+
+   return latestLaunch.flightNumber;
 }
 
 async function getAllLaunches() {

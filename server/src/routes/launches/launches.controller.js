@@ -8,7 +8,7 @@ async function httpGetAllLaunches(req, res) {
     return res.status(200).json(await getAllLaunches());
 }
 
-function httpAddNewLaunch(req, res) {
+async function httpAddNewLaunch(req, res) {
     const launch = req.body;
     const launchProperties = ['mission', 'rocket', 'target', 'launchDate'];
     let counter = 0;
@@ -32,7 +32,8 @@ function httpAddNewLaunch(req, res) {
             }
         }
         counter++;
-        scheduleNewLaunch(launch);
+        launch.launchDate = new Date(launch.launchDate);
+        await scheduleNewLaunch(launch);
     } catch (error) {
         return res.status(500).json({
             message: "CODE 500, Internal Server Error, " + error
