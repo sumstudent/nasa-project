@@ -1,14 +1,14 @@
 const {
     getAllLaunches,
-    addNewLaunch,
     existsLaunchWithId,
-    abortLaunchById, } = require('../../models/launches.model');
+    abortLaunchById,
+    scheduleNewLaunch, } = require('../../models/launches.model');
 
-function httpGetAllLaunches(req, res) {
-    return res.status(200).json(getAllLaunches());
+async function httpGetAllLaunches(req, res) {
+    return res.status(200).json(await getAllLaunches());
 }
 
-function httpAddNewLaunch(req, res) {
+async function httpAddNewLaunch(req, res) {
     const launch = req.body;
     const launchProperties = ['mission', 'rocket', 'target', 'launchDate'];
     let counter = 0;
@@ -32,7 +32,8 @@ function httpAddNewLaunch(req, res) {
             }
         }
         counter++;
-        addNewLaunch(launch);
+        launch.launchDate = new Date(launch.launchDate);
+        await scheduleNewLaunch(launch);
     } catch (error) {
         return res.status(500).json({
             message: "CODE 500, Internal Server Error, " + error
@@ -42,19 +43,26 @@ function httpAddNewLaunch(req, res) {
     return res.status(201).json(launch);
 }
 
-function httpAbortLaunch(req, res) {
+async function httpAbortLaunch(req, res) {
     const launchId = Number(req.params.id);
 
-    //Returns 404 if laucnchId not found
-    if (!existsLaunchWithId(launchId)) {
+    const existsLaunch = await existsLaunchWithId(launchId);
+    if (!existsLaunch) {
         return res.status(404).json({
             error: 'CODE: 404, Launch not found'
         })
     }
 
     const aborted = abortLaunchById(launchId);
-    return res.status(200).json(aborted);
+    if (!aborted) {
+        return res.status(400).json({
+            error: 'Launch not aborted',
+        });
+    }
 
+    return res.status(200).json({
+        ok: true,
+    });
 }
 
 module.exports = {
