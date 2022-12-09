@@ -10,6 +10,8 @@
 
 # production
 /build
+/public
+/src/logs
 
 # misc
 .DS_Store
